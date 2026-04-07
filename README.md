@@ -34,13 +34,13 @@ A full-stack web application that allows users to explore and compare fuel econo
 - Average MPG: 28.68
 
 ## How to Run
-1. Clone the repository
-2. Install dependencies:
-npm install
-3. Start server:
-node server.js
-4. Open in browser:
-http://localhost:3000
+- Clone the repository: git clone https://github.com/sathwikpareedula/toyota-fuel-economy.git
+
+- Install dependencies: npm install
+
+- Start server: node server.js
+
+- Open in browser: http://localhost:3000
 
 ## About
 This project was initially conceptualized during a hackathon and later fully developed independently to analyze and visualize vehicle fuel efficiency data.
