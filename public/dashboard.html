@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Toyota Fuel Economy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="toyota-logo.png" alt="Toyota Logo">
+            <h1>Toyota Fuel Economy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Vehicles</a></li>
+                <li><a href="#">Tips</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="dashboard-grid">
+            <section class="card eco-challenge">
+                <h2>Eco-Challenge Mode</h2>
+                <form id="ecoChallengeForm">
+                    <div class="form-group">
+                        <label for="vehicle">Select Vehicle:</label>
+                        <select id="vehicle" name="vehicle">
+                            <option value="prius">Toyota Prius</option>
+                            <option value="corolla">Toyota Corolla</option>
+                            <option value="camry">Toyota Camry</option>
+                            <option value="rav4">Toyota RAV4</option>
+                            <option value="highlander">Toyota Highlander</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="condition">Select Driving Condition:</label>
+                        <select id="condition" name="condition">
+                            <option value="city">City</option>
+                            <option value="highway">Highway</option>
+                            <option value="mixed">Mixed Terrain</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="drivingStyle">Driving Style:</label>
+                        <select id="drivingStyle" name="drivingStyle">
+                            <option value="eco">Eco-Friendly</option>
+                            <option value="normal">Normal</option>
+                            <option value="aggressive">Aggressive</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Simulate</button>
+                </form>
+
+                <div id="ecoResults" class="results-panel">
+                    <h3>Simulation Results</h3>
+                    <div class="mpg-display">
+                        <div class="mpg-item">
+                            <span class="mpg-label">City MPG</span>
+                            <span id="simCityMPG" class="mpg-value">--</span>
+                        </div>
+                        <div class="mpg-item">
+                            <span class="mpg-label">Highway MPG</span>
+                            <span id="simHighwayMPG" class="mpg-value">--</span>
+                        </div>
+                        <div class="mpg-item">
+                            <span class="mpg-label">Combined MPG</span>
+                            <span id="simCombinedMPG" class="mpg-value">--</span>
+                        </div>
+                    </div>
+                    <div class="eco-feedback" id="ecoFeedback"></div>
+                </div>
+            </section>
+
+            <section class="card fuel-tracker">
+                <h2>Fuel Economy Tracker</h2>
+                <div class="chart-container">
+                    <canvas id="mpgChart"></canvas>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-label">Average MPG</span>
+                        <span class="stat-value" id="avgMpg">32.5</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Best MPG</span>
+                        <span class="stat-value" id="bestMpg">38.2</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">CO₂ Saved</span>
+                        <span class="stat-value" id="co2Saved">127 kg</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card quiz-section">
+                <h2>Eco-Driving Quiz</h2>
+                <div id="quizContainer">
+                    <form id="quizForm">
+                        <div class="quiz-question">
+                            <p>What is the most fuel-efficient Toyota vehicle in 2023?</p>
+                            <div class="quiz-options">
+                                <div class="option">
+                                    <input type="radio" id="option1" name="quiz1" value="option1">
+                                    <label for="option1">Toyota Prius</label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="option2" name="quiz1" value="option2">
+                                    <label for="option2">Toyota Corolla</label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="option3" name="quiz1" value="option3">
+                                    <label for="option3">Toyota Camry</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <p>Which driving habit can help improve fuel economy?</p>
+                            <div class="quiz-options">
+                                <div class="option">
+                                    <input type="radio" id="habit1" name="quiz2" value="habit1">
+                                    <label for="habit1">Rapid acceleration</label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="habit2" name="quiz2" value="habit2">
+                                    <label for="habit2">Maintaining steady speed</label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="habit3" name="quiz2" value="habit3">
+                                    <label for="habit3">Frequent braking</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Submit Answers</button>
+                    </form>
+                    <div id="quizResult" class="quiz-result"></div>
+                </div>
+            </section>
+
+            <section class="card tips-section">
+                <h2>Fuel Economy Tips</h2>
+                <div class="tips-container">
+                    <div class="tip">
+                        <div class="tip-icon">🚗</div>
+                        <div class="tip-content">
+                            <h3>Maintain Steady Speed</h3>
+                            <p>Use cruise control on highways to maintain a constant speed and improve fuel efficiency.</p>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <div class="tip-icon">🔧</div>
+                        <div class="tip-content">
+                            <h3>Regular Maintenance</h3>
+                            <p>Keep your vehicle well-maintained with regular oil changes and proper tire inflation.</p>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <div class="tip-icon">🚦</div>
+                        <div class="tip-content">
+                            <h3>Avoid Idling</h3>
+                            <p>Turn off your engine when stopped for more than 30 seconds to save fuel.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

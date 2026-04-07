@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Economy Quiz - Toyota</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.toyota.com/imgix/responsive/images/Toyota_H1_SansSerif_Logo.png" alt="Toyota Logo">
+            <h1>Fuel Economy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="main.html">Dashboard</a></li>
+                <li><a href="compare.html">Compare Cars</a></li>
+                <li><a href="quiz.html" class="active">Fuel Economy Quiz</a></li>
+                <li><a href="welcome.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Test Your Fuel Economy Knowledge</h2>
+            <p>Take this quiz to test your knowledge about fuel economy and eco-friendly driving!</p>
+            
+            <div id="quiz-container">
+                <div id="quiz-start">
+                    <p>This quiz contains 5 questions about fuel economy and eco-driving techniques. See how much you know!</p>
+                    <button id="start-quiz" class="btn-primary">Start Quiz</button>
+                </div>
+                
+                <div id="quiz-questions" style="display: none;">
+                    <div id="question-container"></div>
+                    <div id="options-container"></div>
+                    <button id="next-question" class="btn-primary" style="display: none;">Next Question</button>
+                </div>
+                
+                <div id="quiz-results" style="display: none;">
+                    <h3>Quiz Results</h3>
+                    <p>You scored: <span id="score">0</span> out of 5</p>
+                    <div id="result-message"></div>
+                    <button id="restart-quiz" class="btn-primary">Restart Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Toyota Motor Corporation. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz questions
+        const quizQuestions = [
+            {
+                question: "Which of these factors has the biggest impact on fuel economy?",
+                options: [
+                    "Driving behavior (acceleration and braking)",
+                    "Car color",
+                    "Radio volume",
+                    "Number of passengers"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "What does MPG stand for?",
+                options: [
+                    "Miles Per Gallon",
+                    "Maximum Power Generated",
+                    "Minimum Petroleum Grade",
+                    "Motor Performance Grade"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "Which Toyota model is known for having the best fuel economy?",
+                options: [
+                    "Tundra",
+                    "Prius",
+                    "4Runner",
+                    "Tacoma"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "What is the recommended tire pressure for optimal fuel economy?",
+                options: [
+                    "As low as possible",
+                    "As high as possible",
+                    "The manufacturer's recommended PSI",
+                    "It doesn't matter"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "What is 'hypermiling'?",
+                options: [
+                    "Driving at maximum speed on highways",
+                    "Using techniques to maximize fuel efficiency",
+                    "A special type of hybrid engine",
+                    "Adding aftermarket parts to increase power"
+                ],
+                correctAnswer: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+
+        // DOM elements
+        const startSection = document.getElementById('quiz-start');
+        const questionsSection = document.getElementById('quiz-questions');
+        const resultsSection = document.getElementById('quiz-results');
+        const questionContainer = document.getElementById('question-container');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-question');
+        const scoreElement = document.getElementById('score');
+        const resultMessage = document.getElementById('result-message');
+
+        // Event listeners
+        document.getElementById('start-quiz').addEventListener('click', startQuiz);
+        document.getElementById('next-question').addEventListener('click', nextQuestion);
+        document.getElementById('restart-quiz').addEventListener('click', restartQuiz);
+
+        function startQuiz() {
+            startSection.style.display = 'none';
+            questionsSection.style.display = 'block';
+            currentQuestion = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            selectedOption = null;
+            nextButton.style.display = 'none';
+            
+            const question = quizQuestions[currentQuestion];
+            questionContainer.innerHTML = `<h3>Question ${currentQuestion + 1} of 5:</h3><p>${question.question}</p>`;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.innerHTML = `<label><input type="radio" name="answer" value="${index}"> ${option}</label>`;
+                optionElement.querySelector('input').addEventListener('change', () => {
+                    selectedOption = index;
+                    nextButton.style.display = 'block';
+                    
+                    // Remove selected class from all options
+                    document.querySelectorAll('.quiz-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to this option
+                    optionElement.classList.add('selected');
+                });
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        function nextQuestion() {
+            // Check answer and update score
+            if (selectedOption === quizQuestions[currentQuestion].correctAnswer) {
+                score++;
+            }
+            
+            currentQuestion++;
+            
+            if (currentQuestion < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            questionsSection.style.display = 'none';
+            resultsSection.style.display = 'block';
+            scoreElement.textContent = score;
+            
+            let message = '';
+            if (score === 5) {
+                message = "Perfect score! You're a fuel economy expert!";
+            } else if (score >= 3) {
+                message = "Great job! You know quite a bit about fuel economy!";
+            } else {
+                message = "You've got some learning to do about fuel economy. Check out Toyota's eco-driving tips!";
+            }
+            
+            resultMessage.textContent = message;
+        }
+
+        function restartQuiz() {
+            resultsSection.style.display = 'none';
+            startQuiz();
+        }
+    </script>
+</body>
+</html>

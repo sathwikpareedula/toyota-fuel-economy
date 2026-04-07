@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Fuel Economy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.toyota.com/imgix/responsive/images/Toyota_H1_SansSerif_Logo.png" alt="Toyota Logo">
+            <h1>Fuel Economy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="main.html">Dashboard</a></li>
+                <li><a href="compare.html">Compare Cars</a></li>
+                <li><a href="quiz.html">Fuel Economy Quiz</a></li>
+                <li><a href="welcome.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Toyota Fuel Economy Calculator</h2>
+            
+            <form id="fuelForm">
+                <div class="form-group">
+                    <label for="model">Select Vehicle Model:</label>
+                    <select id="model" name="model">
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Select Year:</label>
+                    <select id="year" name="year">
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Get Fuel Economy</button>
+            </form>
+
+            <div id="results" class="results-panel" style="display: none;">
+                <h3>Fuel Economy Results</h3>
+                <div class="mpg-display">
+                    <div class="mpg-item">
+                        <span class="mpg-label">City MPG</span>
+                        <span class="mpg-value" id="cityMPG">--</span>
+                    </div>
+                    <div class="mpg-item">
+                        <span class="mpg-label">Highway MPG</span>
+                        <span class="mpg-value" id="highwayMPG">--</span>
+                    </div>
+                    <div class="mpg-item">
+                        <span class="mpg-label">Combined MPG</span>
+                        <span class="mpg-value" id="combinedMPG">--</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="fuelEconomyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
