@@ -1,4 +1,12 @@
-# Toyota Fuel Economy Web App
+# Toyota Fuel Economy Analyzer (Full-Stack Web App)
+### Dashboard
+![Dashboard](images/dashboard.png)
+
+### Comparison
+![Comparison](images/compare.png)
+
+### Charts
+![Charts](images/chart.png)
 
 A full-stack web application that allows users to explore and compare fuel economy data across Toyota vehicles.
 
@@ -15,6 +23,11 @@ A full-stack web application that allows users to explore and compare fuel econo
 - Data: CSV-based dataset (431 vehicles)
 - Visualization: Chart.js
 
+## API Endpoints
+
+- GET /api/vehicles → Fetch all vehicle data
+- GET /api/vehicles/:id → Fetch specific vehicle details
+
 ## Dataset
 - 431 vehicle records (2021–2025)
 - 106 unique Toyota models
@@ -30,4 +43,12 @@ node server.js
 http://localhost:3000
 
 ## About
-This project was initially conceptualized during a hackathon and later fully developed independently.
+This project was initially conceptualized during a hackathon and later fully developed independently to analyze and visualize vehicle fuel efficiency data.
+
+## Skills Demonstrated
+
+- REST API development
+- Frontend-backend integration
+- Data parsing from CSV
+- Data visualization using Chart.js
+- Full-stack application development
